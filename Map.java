@@ -104,8 +104,6 @@ public class Map {
     }
 
     public void viewMapInfo() {
-        System.out.println("Stage " + stage + "\n");
-
         for (int i = 0; i < mapInfo.getHeight(); i++) {
             for (int j = 0; j < mapInfo.getWidth(); j++) {
                 if (map[i][j] == -1) {
@@ -131,10 +129,5 @@ public class Map {
             System.out.println();
         }
         System.out.println();
-        System.out.println("가로크기: " + mapInfo.getWidth());
-        System.out.println("세로크기: " + mapInfo.getHeight());
-        System.out.println("구멍의 수: " + mapInfo.getHallNum());
-        System.out.println("공의 수: " + mapInfo.getBallNum());
-        System.out.println("플레이어 위치: " + mapInfo.getPlayerPosition() + "\n");
     }
 }
