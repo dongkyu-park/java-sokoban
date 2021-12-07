@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.StringReader;
+import java.io.*;
 
 public class Map {
 
@@ -25,22 +23,9 @@ public class Map {
         }
     }
 
-    private BufferedReader getMapData() {
-        String mapData = "Stage 1\n" +
-                "#####\n" +
-                "#OoP#\n" +
-                "#####\n" +
-                "=====\n" +
-                "Stage 2\n" +
-                "  #######  \n" +
-                "###  O  ###\n" +
-                "#    o    #\n" +
-                "# Oo P oO #\n" +
-                "###  o  ###\n" +
-                "  #  O  #  \n" +
-                "  #######  ";
-
-        return new BufferedReader(new StringReader(mapData));
+    private BufferedReader getMapData() throws FileNotFoundException {
+        String directoryName = System.getProperty("user.dir");
+        return new BufferedReader(new FileReader(directoryName + "\\map.txt"));
     }
 
     public void createStageMap(int currentStage) throws IOException {
