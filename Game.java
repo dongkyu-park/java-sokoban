@@ -9,6 +9,7 @@ public class Game {
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
         int currentStage = 1;
+        int countTurn = 0;
 
         Map map = start(currentStage);
         map.viewMapInfo();
@@ -36,7 +37,10 @@ public class Game {
                 boolean success = controller.isSuccess();
 
                 if (map.getMapInfo().getHallNum() == 0) {
-                    System.out.println("빠밤! Stage " + currentStage + "클리어!\n");
+                    countTurn++;
+                    System.out.println("빠밤! Stage " + currentStage + "클리어!");
+                    System.out.println("턴수: " + countTurn + "\n");
+                    countTurn = 0;
                     if (currentStage == END_STAGE) {
                         System.out.println("전체 게임을 클리어 하셨습니다!\n축하 드립니다!");
                         exit = true;
@@ -51,6 +55,7 @@ public class Game {
                 map.viewMapInfo();
 
                 if (success) {
+                    countTurn++;
                     if (control.charAt(i) == 'w') {
                         System.out.println("W: 위쪽으로 이동합니다.\n");
                         continue;
