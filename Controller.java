@@ -25,7 +25,7 @@ public class Controller {
         int yPosition = Integer.parseInt(arr[1].substring(0, arr[1].length() - 1)) - 1;
 
         if (control == 'w') {
-            if (setPlayerMoveSpace(xPosition - 1, yPosition)) {
+            if (setPlayerMoveSpace(xPosition - 1, yPosition, xPosition - 2, yPosition) ) {
                 setAfterPlayerMove(xPosition, yPosition);
                 this.map.getMapInfo().setPlayerPosition("(" + xPosition + ", " + (yPosition + 1) + ")");
                 this.success = true;
@@ -36,7 +36,7 @@ public class Controller {
         }
 
         if (control == 'a') {
-            if (setPlayerMoveSpace(xPosition, yPosition - 1)) {
+            if (setPlayerMoveSpace(xPosition, yPosition - 1, xPosition, yPosition - 2)) {
                 setAfterPlayerMove(xPosition, yPosition);
                 this.map.getMapInfo().setPlayerPosition("(" + (xPosition + 1) + ", " + yPosition + ")");
                 this.success = true;
@@ -47,7 +47,7 @@ public class Controller {
         }
 
         if (control == 's') {
-            if (setPlayerMoveSpace(xPosition + 1, yPosition)) {
+            if (setPlayerMoveSpace(xPosition + 1, yPosition, xPosition + 2, yPosition)) {
                 setAfterPlayerMove(xPosition, yPosition);
                 this.map.getMapInfo().setPlayerPosition("(" + (xPosition + 2) + ", " + (yPosition + 1) + ")");
                 this.success = true;
@@ -58,7 +58,7 @@ public class Controller {
         }
 
         if (control == 'd') {
-            if (setPlayerMoveSpace(xPosition, yPosition + 1)) {
+            if (setPlayerMoveSpace(xPosition, yPosition + 1, xPosition, yPosition + 2)) {
                 setAfterPlayerMove(xPosition, yPosition);
                 this.map.getMapInfo().setPlayerPosition("(" + (xPosition + 1) + ", " + (yPosition + 2) + ")");
                 this.success = true;
@@ -69,16 +69,20 @@ public class Controller {
         }
     }
 
-    public boolean setPlayerMoveSpace(int xPosition, int yPosition) {
+    public boolean setPlayerMoveSpace(int xPosition, int yPosition, int doubleXPosition, int doubleYPosition) {
         if (this.map.getMap()[xPosition][yPosition] == -1) { // destination is Empty
             this.map.getMap()[xPosition][yPosition] = 3;
-            this.map.getMapInfo().setPlayerPosition("(" + xPosition + ", " + (yPosition + 1) + ")");
             return true;
         }
         if (this.map.getMap()[xPosition][yPosition] == 1) { // destination is hall
             this.map.getMap()[xPosition][yPosition] = 6;
-            this.map.getMapInfo().setPlayerPosition("(" + xPosition + ", " + (yPosition + 1) + ")");
             return true;
+        }
+        if (this.map.getMap()[xPosition][yPosition] == 2) { // destination is ball
+            if (setBallMoveSpace(doubleXPosition, doubleYPosition)) {
+                this.map.getMap()[xPosition][yPosition] = 3;
+                return true;
+            }
         }
         return false;
     }
@@ -89,5 +93,18 @@ public class Controller {
         } else { // not in hall
             this.map.getMap()[xPosition][yPosition] = -1;
         }
+    }
+
+    public boolean setBallMoveSpace(int xPosition, int yPosition) {
+        if (this.map.getMap()[xPosition][yPosition] == -1) { // destination is Empty
+            this.map.getMap()[xPosition][yPosition] = 2;
+            return true;
+        }
+        if (this.map.getMap()[xPosition][yPosition] == 1) { // destination is hall
+            this.map.getMap()[xPosition][yPosition] = 5;
+            this.map.getMapInfo().setHallNum(this.map.getMapInfo().getHallNum() - 1);
+            return true;
+        }
+        return false;
     }
 }

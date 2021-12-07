@@ -111,6 +111,10 @@ public class Map {
                 if (map[i][j] == 3 || map[i][j] == 6) {
                     System.out.print("P");
                 }
+
+                if (map[i][j] == 5) {
+                    System.out.print("0");
+                }
             }
             System.out.println();
         }

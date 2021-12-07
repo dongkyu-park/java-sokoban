@@ -36,7 +36,7 @@ public class Game {
                 boolean success = controller.isSuccess();
 
                 if (map.getMapInfo().getHallNum() == 0) {
-                    System.out.println("빠밤! Stage " + currentStage + "클리어!");
+                    System.out.println("빠밤! Stage " + currentStage + "클리어!\n");
                     if (currentStage == END_STAGE) {
                         System.out.println("전체 게임을 클리어 하셨습니다!\n축하 드립니다!");
                         exit = true;
