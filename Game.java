@@ -2,11 +2,15 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Game {
+
+    public static final int END_STAGE = 5;
+
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
+        int currentStage = 1;
 
-        Map map = start(2);
+        Map map = start(currentStage);
         map.viewMapInfo();
 
         while (!exit) {
@@ -20,11 +24,30 @@ public class Game {
                     break;
                 }
 
+                if (control.charAt(i) == 'r') {
+                    System.out.println("스테이지를 초기화 합니다.");
+                    map = start(currentStage);
+                    map.viewMapInfo();
+                    break;
+                }
+
                 Controller controller = new Controller(map, control.charAt(i));
                 map = controller.getMap();
                 boolean success = controller.isSuccess();
 
-                System.out.println();
+                if (map.getMapInfo().getHallNum() == 0) {
+                    System.out.println("빠밤! Stage " + currentStage + "클리어!");
+                    if (currentStage == END_STAGE) {
+                        System.out.println("전체 게임을 클리어 하셨습니다!\n축하 드립니다!");
+                        exit = true;
+                    } else {
+                        currentStage++;
+                        map = start(currentStage);
+                        map.viewMapInfo();
+                    }
+                    break;
+                }
+
                 map.viewMapInfo();
 
                 if (success) {
@@ -58,7 +81,7 @@ public class Game {
         Map map = new Map();
         map.createStageMap(stage);
 
-        System.out.println("Stage " + stage + "\n");
+        System.out.println("Stage " + stage);
 
         return map;
     }

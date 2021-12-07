@@ -89,6 +89,7 @@ public class Map {
     }
 
     public void viewMapInfo() {
+        System.out.println();
         for (int i = 0; i < mapInfo.getHeight(); i++) {
             for (int j = 0; j < mapInfo.getWidth(); j++) {
                 if (map[i][j] == -1) {
