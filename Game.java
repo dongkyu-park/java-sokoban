@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Game {
@@ -13,6 +14,7 @@ public class Game {
         int countTurn = 0;
         int backCount = 0;
         ArrayList<Map> log = new ArrayList<>();
+        Save[] saveSlot = new Save[5];
 
         Map map = start(currentStage);
         map.viewMapInfo();
@@ -23,6 +25,29 @@ public class Game {
             String control = sc.next();
 
             for (int i = 0; i < control.length(); i++) {
+                if (control.length() >= 2 && control.charAt(1) == 'S') {
+                    System.out.println(control.charAt(0) + "번 세이브에 진행상황을 저장합니다.");
+                    saveSlot[Character.getNumericValue(control.charAt(0)) - 1] = new Save(currentStage, countTurn, backCount, (ArrayList<Map>) log.clone(), map.clone());
+                    map.viewMapInfo();
+                    break;
+                }
+
+                if (control.length() >= 2 && control.charAt(1) == 'L') {
+                    try {
+                        map = saveSlot[Character.getNumericValue(control.charAt(0)) - 1].getMap().clone();
+                        System.out.println(control.charAt(0) + "번 세이브에서 진행상황을 불러옵니다.");
+                    } catch (NullPointerException e) {
+                        System.out.println("해당 세이브 슬롯에 데이터가 존재하지 않습니다.");
+                        break;
+                    }
+                    log = (ArrayList<Map>) saveSlot[Character.getNumericValue(control.charAt(0)) - 1].getLog().clone();
+                    backCount = saveSlot[Character.getNumericValue(control.charAt(0)) - 1].getBackCount();
+                    countTurn = saveSlot[Character.getNumericValue(control.charAt(0)) - 1].getCountTurn();
+                    currentStage = saveSlot[Character.getNumericValue(control.charAt(0)) - 1].getCurrentStage();
+                    map.viewMapInfo();
+                    break;
+                }
+
                 if (control.charAt(i) == 'q') {
                     System.out.println("Bye~");
                     exit = true;
