@@ -25,7 +25,7 @@ public class Game {
                 }
 
                 if (control.charAt(i) == 'r') {
-                    System.out.println("스테이지를 초기화 합니다.");
+                    System.out.println("스테이지를 초기화 합니다.\n");
                     map = start(currentStage);
                     map.viewMapInfo();
                     break;

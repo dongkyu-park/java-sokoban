@@ -84,6 +84,13 @@ public class Controller {
                 return true;
             }
         }
+        if (this.map.getMap()[xPosition][yPosition] == 5) { // destination is hall in ball
+            if (setBallMoveSpace(doubleXPosition, doubleYPosition)) {
+                this.map.getMap()[xPosition][yPosition] = 6;
+                this.map.getMapInfo().setHallNum(this.map.getMapInfo().getHallNum() + 1);
+                return true;
+            }
+        }
         return false;
     }
 
