@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Map {
+public class Map implements Cloneable{
 
     public static final int X = 500;
     public static final int Y = 500;
@@ -71,6 +71,10 @@ public class Map {
                         map[i][j] = 3;
                         mapInfo.setPlayerPosition("(" + (i + 1) + ", " + (j + 1) + ")");
                     }
+                    if (str.charAt(j) == '0') {
+                        map[i][j] = 5;
+                        mapInfo.setHeight(i + 1);
+                    }
                     if (str.startsWith("=")) {
                         endStage = true;
                         break;
@@ -119,5 +123,26 @@ public class Map {
             System.out.println();
         }
         System.out.println();
+    }
+
+    @Override
+    public Map clone() { // return 타입을 Object → Map 변경
+        Object obj = null;
+        try {
+            obj = super.clone();
+        } catch (CloneNotSupportedException e) {
+
+        }
+        Map m = (Map)obj;
+        int[][] B = new int[this.map.length][this.map[0].length]; // B 선언
+
+        for(int i = 0; i < this.map.length; i++){ // 2중 반복문
+            for(int j = 0 ; j < this.map[0].length; j++){
+                B[i][j] = this.map[i][j];
+            }
+        }
+        m.map = B;
+        m.mapInfo = this.mapInfo.clone();
+        return m;
     }
 }

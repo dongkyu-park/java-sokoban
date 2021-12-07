@@ -1,4 +1,4 @@
-public class MapInfo {
+public class MapInfo implements Cloneable{
 
     private int width;
     private int height;
@@ -52,5 +52,16 @@ public class MapInfo {
 
     public void setPlayerPosition(String playerPosition) {
         this.playerPosition = playerPosition;
+    }
+
+    @Override
+    public MapInfo clone() { // return 타입을 Object → MapInfo 변경
+        Object obj = null;
+        try {
+            obj = super.clone();
+        } catch (CloneNotSupportedException e) {
+
+        }
+        return (MapInfo)obj; // MapInfo 타입으로 형변환
     }
 }
