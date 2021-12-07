@@ -16,7 +16,20 @@ public class Controller {
         if (this.control == 'w') {
             if (this.map.getMap()[xPosition - 1][yPosition] == -1) {
                 this.map.getMap()[xPosition - 1][yPosition] = 3;
-                this.map.getMap()[xPosition][yPosition] = -1;
+                if (this.map.getMap()[xPosition][yPosition] == 6) {
+                    this.map.getMap()[xPosition][yPosition] = 1;
+                } else {
+                    this.map.getMap()[xPosition][yPosition] = -1;
+                }
+                this.map.getMapInfo().setPlayerPosition("(" + xPosition + ", " + (yPosition + 1) + ")");
+                this.success = true;
+            } else if (this.map.getMap()[xPosition - 1][yPosition] == 1) {
+                this.map.getMap()[xPosition - 1][yPosition] = 6;
+                if (this.map.getMap()[xPosition][yPosition] == 6) {
+                    this.map.getMap()[xPosition][yPosition] = 1;
+                } else {
+                    this.map.getMap()[xPosition][yPosition] = -1;
+                }
                 this.map.getMapInfo().setPlayerPosition("(" + xPosition + ", " + (yPosition + 1) + ")");
                 this.success = true;
             } else {
@@ -25,7 +38,20 @@ public class Controller {
         } else if (this.control == 'a') {
             if (this.map.getMap()[xPosition][yPosition - 1] == -1) {
                 this.map.getMap()[xPosition][yPosition - 1] = 3;
-                this.map.getMap()[xPosition][yPosition] = -1;
+                if (this.map.getMap()[xPosition][yPosition] == 6) {
+                    this.map.getMap()[xPosition][yPosition] = 1;
+                } else {
+                    this.map.getMap()[xPosition][yPosition] = -1;
+                }
+                this.map.getMapInfo().setPlayerPosition("(" + (xPosition + 1) + ", " + yPosition + ")");
+                this.success = true;
+            } else if (this.map.getMap()[xPosition][yPosition - 1] == 1) {
+                this.map.getMap()[xPosition][yPosition - 1] = 6;
+                if (this.map.getMap()[xPosition][yPosition] == 6) {
+                    this.map.getMap()[xPosition][yPosition] = 1;
+                } else {
+                    this.map.getMap()[xPosition][yPosition] = -1;
+                }
                 this.map.getMapInfo().setPlayerPosition("(" + (xPosition + 1) + ", " + yPosition + ")");
                 this.success = true;
             } else {
@@ -34,7 +60,20 @@ public class Controller {
         } else if (this.control == 's') {
             if (this.map.getMap()[xPosition + 1][yPosition] == -1) {
                 this.map.getMap()[xPosition + 1][yPosition] = 3;
-                this.map.getMap()[xPosition][yPosition] = -1;
+                if (this.map.getMap()[xPosition][yPosition] == 6) {
+                    this.map.getMap()[xPosition][yPosition] = 1;
+                } else {
+                    this.map.getMap()[xPosition][yPosition] = -1;
+                }
+                this.map.getMapInfo().setPlayerPosition("(" + (xPosition + 2) + ", " + (yPosition + 1) + ")");
+                this.success = true;
+            } else if (this.map.getMap()[xPosition + 1][yPosition] == 1) {
+                this.map.getMap()[xPosition + 1][yPosition] = 6;
+                if (this.map.getMap()[xPosition][yPosition] == 6) {
+                    this.map.getMap()[xPosition][yPosition] = 1;
+                } else {
+                    this.map.getMap()[xPosition][yPosition] = -1;
+                }
                 this.map.getMapInfo().setPlayerPosition("(" + (xPosition + 2) + ", " + (yPosition + 1) + ")");
                 this.success = true;
             } else {
@@ -43,7 +82,20 @@ public class Controller {
         } else if (this.control == 'd') {
             if (this.map.getMap()[xPosition][yPosition + 1] == -1) {
                 this.map.getMap()[xPosition][yPosition + 1] = 3;
-                this.map.getMap()[xPosition][yPosition] = -1;
+                if (this.map.getMap()[xPosition][yPosition] == 6) {
+                    this.map.getMap()[xPosition][yPosition] = 1;
+                } else {
+                    this.map.getMap()[xPosition][yPosition] = -1;
+                }
+                this.map.getMapInfo().setPlayerPosition("(" + (xPosition + 1) + ", " + (yPosition + 2) + ")");
+                this.success = true;
+            } else if (this.map.getMap()[xPosition][yPosition + 1] == 1) {
+                this.map.getMap()[xPosition][yPosition + 1] = 6;
+                if (this.map.getMap()[xPosition][yPosition] == 6) {
+                    this.map.getMap()[xPosition][yPosition] = 1;
+                } else {
+                    this.map.getMap()[xPosition][yPosition] = -1;
+                }
                 this.map.getMapInfo().setPlayerPosition("(" + (xPosition + 1) + ", " + (yPosition + 2) + ")");
                 this.success = true;
             } else {

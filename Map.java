@@ -108,7 +108,7 @@ public class Map {
                     System.out.print("o");
                 }
 
-                if (map[i][j] == 3) {
+                if (map[i][j] == 3 || map[i][j] == 6) {
                     System.out.print("P");
                 }
             }
