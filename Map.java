@@ -25,15 +25,40 @@ public class Map implements Cloneable{
 
     private BufferedReader getMapData() throws FileNotFoundException {
         String directoryName = System.getProperty("user.dir");
-        return new BufferedReader(new FileReader(directoryName + "\\map.txt"));
+        return new BufferedReader(new FileReader(directoryName + "\\map_enc.txt"));
     }
 
-    public void createStageMap(int currentStage) throws IOException {
+    private void createEncMap() throws FileNotFoundException {
+        String directoryName = System.getProperty("user.dir");
+        BufferedReader reader = new BufferedReader(new FileReader(directoryName + "\\map.txt"));
+
+        File file = new File(directoryName + "\\map_enc.txt");
+        AES256 aes256 = new AES256();
+
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file, false);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            String str = "";
+
+            while ((str = reader.readLine()) != null) {
+                writer.write(aes256.encrypt(str));
+                writer.newLine();
+            }
+
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createStageMap(int currentStage) throws Exception {
+        createEncMap();
         BufferedReader reader = getMapData();
+        AES256 aes256 = new AES256();
         String str = "";
         boolean endStage = false;
 
-        while ((str = reader.readLine()) != null) {
+        while ((str = aes256.decrypt(reader.readLine())) != null) {
             if (stage < currentStage) {
                 passStage(str);
                 continue;

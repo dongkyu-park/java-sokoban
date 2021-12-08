@@ -1,13 +1,11 @@
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Game {
 
     public static final int END_STAGE = 5;
 
-    public static void main(String[] args) throws IOException, CloneNotSupportedException {
+    public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
         int currentStage = 1;
@@ -152,7 +150,7 @@ public class Game {
         }
     }
 
-    public static Map start(int stage) throws IOException {
+    public static Map start(int stage) throws Exception {
         Map map = new Map();
         map.createStageMap(stage);
 
